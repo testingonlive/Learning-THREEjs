@@ -126,6 +126,36 @@ function init(){
     
     gui.add( controls, 'visible' );
     
+    render();
+    
+    function render(){
+        stats.update();
+        
+        cube.visible = controls.visible;
+        
+        cube.rotation.x = controls.rotationX;
+        cube.rotation.y = controls.rotationY;
+        cube.rotation.z = controls.rotationZ;
+        
+        cube.scale.set( controls.scaleX, controls.scaleY, controls.scaleZ );
+        
+        requestAnimationFrame( render );
+        renderer.render( scene, camera );
+    }
+    
+    function initStats(){
+        var stats = new Stats();
+        
+        stats.setMode( 0 );
+        
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.left = '0px';
+        stats.domElement.style.top ='0px';
+        
+        document.getElementById( 'Stats-output' ).appendChild( stats.domElement );
+        
+        return stats;
+    }
     
 }
 
